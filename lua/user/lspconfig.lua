@@ -50,6 +50,7 @@ function M.config()
 
   local servers = {
     "lua_ls",
+    "clangd",
     "cssls",
     "html",
     "tsserver",
@@ -72,7 +73,7 @@ function M.config()
         { name = "DiagnosticSignInfo", text = icons.diagnostics.Information },
       },
     },
-    virtual_text = false,
+    virtual_text = true,
     update_in_insert = false,
     underline = true,
     severity_sort = true,
@@ -109,6 +110,13 @@ function M.config()
 
     if server == "lua_ls" then
       require("neodev").setup {}
+    end
+
+    if server == "clangd" then
+      opts.capabilities.offsetEncoding = "utf-8"
+      lspconfig.clangd.setup {
+        capabilities = opts.capabilities,
+      }
     end
 
     lspconfig[server].setup(opts)
