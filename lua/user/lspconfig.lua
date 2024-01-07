@@ -51,6 +51,7 @@ function M.config()
   local servers = {
     "lua_ls",
     "clangd",
+    "rust_analyzer",
     "cssls",
     "html",
     "tsserver",
