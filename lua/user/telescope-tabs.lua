@@ -1,10 +1,15 @@
 local M = {
   "LukasPietzschmann/telescope-tabs",
   event = "VeryLazy",
-  commit = "801425bd19d3fb511ef477bf44a1f99b82419a9c",
 }
 
 function M.config()
+
+  local wk = require "which-key"
+  wk.register {
+    ["<leader>aa"] = { "<cmd>lua require('telescope').extensions['telescope-tabs'].list_tabs(require('telescope.themes').get_dropdown{previewer = false, initial_mode='normal', prompt_title='Tabs'})<cr>", "Find Tabs" },
+  }
+
   require("telescope-tabs").setup {
     show_preview = false,
     close_tab_shortcut_i = "<C-d>", -- if you're in insert mode

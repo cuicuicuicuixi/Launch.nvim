@@ -1,10 +1,15 @@
 local M = {
   "nvim-tree/nvim-tree.lua",
   event = "VeryLazy",
-  commit = "40b9b887d090d5da89a84689b4ca0304a9649f62",
 }
 
 function M.config()
+
+  local wk = require "which-key"
+  wk.register {
+    ["<leader>e"] = { "<cmd>NvimTreeToggle<CR>", "Explorer" },
+  }
+
   local function my_on_attach(bufnr)
     local api = require "nvim-tree.api"
 
@@ -25,7 +30,11 @@ function M.config()
 
   require("nvim-tree").setup {
     on_attach = my_on_attach,
+    hijack_netrw = false,
     sync_root_with_cwd = true,
+    view = {
+      relativenumber = true,
+    },
     renderer = {
       add_trailing = false,
       group_empty = false,
@@ -83,22 +92,22 @@ function M.config()
       ignore_list = {},
     },
 
-    diagnostics = {
-      enable = true,
-      show_on_dirs = false,
-      show_on_open_dirs = true,
-      debounce_delay = 50,
-      severity = {
-        min = vim.diagnostic.severity.HINT,
-        max = vim.diagnostic.severity.ERROR,
-      },
-      icons = {
-        hint = icons.diagnostics.BoldHint,
-        info = icons.diagnostics.BoldInformation,
-        warning = icons.diagnostics.BoldWarning,
-        error = icons.diagnostics.BoldError,
-      },
-    },
+    -- diagnostics = {
+    --   enable = true,
+    --   show_on_dirs = false,
+    --   show_on_open_dirs = true,
+    --   debounce_delay = 50,
+    --   severity = {
+    --     min = vim.diagnostic.severity.HINT,
+    --     max = vim.diagnostic.severity.ERROR,
+    --   },
+    --   icons = {
+    --     hint = icons.diagnostics.BoldHint,
+    --     info = icons.diagnostics.BoldInformation,
+    --     warning = icons.diagnostics.BoldWarning,
+    --     error = icons.diagnostics.BoldError,
+    --   },
+    -- },
   }
 end
 

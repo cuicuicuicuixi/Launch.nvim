@@ -1,51 +1,56 @@
 local M = {
   "nvim-lualine/lualine.nvim",
-  commit = "7533b0ead663d80452210c0c089e5105089697e5",
+  dependencies = {
+    "AndreM222/copilot-lualine",
+  },
 }
 
 function M.config()
-  local sl_hl = vim.api.nvim_get_hl_by_name("StatusLine", true)
-  vim.api.nvim_set_hl(0, "Copilot", { fg = "#6CC644", bg = sl_hl.background })
   local icons = require "user.icons"
   local diff = {
     "diff",
-    colored = true,
+    colored = false,
     symbols = { added = icons.git.LineAdded, modified = icons.git.LineModified, removed = icons.git.LineRemoved }, -- Changes the symbols used by the diff.
   }
 
-  local copilot = function()
-    local buf_clients = vim.lsp.get_active_clients { bufnr = 0 }
-    if #buf_clients == 0 then
-      return "LSP Inactive"
-    end
+  local diagnostics = {
+    "diagnostics",
+    sections = { "error", "warn" },
+    colored = false, -- Displays diagnostics status in color if set to true.
+    always_visible = true, -- Show diagnostics even if there are none.
+  }
 
-    local buf_client_names = {}
-    local copilot_active = false
+  local filetype = {
+    function()
+      local filetype = vim.bo.filetype
+      local upper_case_filetypes = {
+        "json",
+        "jsonc",
+        "yaml",
+        "toml",
+        "css",
+        "scss",
+        "html",
+        "xml",
+      }
 
-    for _, client in pairs(buf_clients) do
-      if client.name ~= "null-ls" and client.name ~= "copilot" then
-        table.insert(buf_client_names, client.name)
+      if vim.tbl_contains(upper_case_filetypes, filetype) then
+        return filetype:upper()
       end
 
-      if client.name == "copilot" then
-        copilot_active = true
-      end
-    end
-
-    if copilot_active then
-      return "%#Copilot#" .. icons.git.Octoface .. "%*"
-    end
-    return ""
-  end
+      return filetype
+    end,
+  }
 
   require("lualine").setup {
     options = {
       -- component_separators = { left = "", right = "" },
       -- section_separators = { left = "", right = "" },
+      -- component_separators = { left = "", right = "" },
+      -- section_separators = { left = "", right = "" },
       component_separators = { left = "", right = "" },
-      section_separators = { left = "", right = "" },
-      -- component_separators = { left = "", right = "" },
-      -- section_separators = { left = "", right = "" },
+      section_separators = { left = "", right = "" },
+
       ignore_focus = { "NvimTree" },
     },
     sections = {
@@ -55,13 +60,16 @@ function M.config()
       -- lualine_x = { copilot },
       -- lualine_y = { "filetype" },
       -- lualine_z = { "progress" },
-      lualine_a = { "mode" },
+      -- lualine_a = { "mode" },
+      lualine_a = {},
       lualine_b = { "branch" },
-      lualine_c = { diff },
-      lualine_x = { "diagnostics", copilot },
-      lualine_y = { "filetype" },
-      lualine_z = { "progress" },
+      lualine_c = { diagnostics },
+      -- lualine_x = { diff, "copilot", filetype },
+      lualine_x = { "copilot", filetype },
+      lualine_y = { "progress" },
+      lualine_z = {},
     },
+    -- extensions = { "quickfix", "man", "fugitive", "oil" },
     extensions = { "quickfix", "man", "fugitive" },
   }
 end
