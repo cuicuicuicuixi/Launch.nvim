@@ -13,7 +13,6 @@ local M = {
     "rebelot/kanagawa.nvim",
     lazy = false,
     priority = 1000,
-    commit = "c19b9023842697ec92caf72cd3599f7dd7be4456",
 }
 
 function M.config()

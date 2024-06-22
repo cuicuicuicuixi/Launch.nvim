@@ -51,7 +51,7 @@ function M.config()
       component_separators = { left = "", right = "" },
       section_separators = { left = "", right = "" },
 
-      ignore_focus = { "NvimTree" },
+      ignore_focus = { "Neotree", "Alpha" },
     },
     sections = {
       -- lualine_a = { {"branch", icon =""} },
@@ -64,8 +64,9 @@ function M.config()
       lualine_a = {},
       lualine_b = { "branch" },
       lualine_c = { diagnostics },
-      -- lualine_x = { diff, "copilot", filetype },
-      lualine_x = { "copilot", filetype },
+      -- lualine_x = { diff, "filetype" },
+      -- lualine_x = { "copilot", "filetype" },
+      lualine_x = { "filetype" },
       lualine_y = { "progress" },
       lualine_z = {},
     },
