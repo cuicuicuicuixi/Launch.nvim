@@ -91,7 +91,7 @@ function M.config()
     "lua_ls",
     "clangd",
     "cmake",
-    "rust_analyzer",
+    -- "rust_analyzer",
     "cssls",
     "html",
     "tsserver",

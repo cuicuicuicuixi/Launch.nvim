@@ -27,7 +27,7 @@ function M.config()
       fg = "NONE", -- The gui style to use for the fg highlight group.
       bg = "BOLD", -- The gui style to use for the bg highlight group.
     },
-    merge_keywords = true, -- when true, custom keywords will be merged with the defaults
+    megge_keywords = true, -- when true, custom keywords will be merged with the defaults
     -- highlighting of the line containing the todo comment
     -- * before: highlights before the keyword (typically comment characters)
     -- * keyword: highlights of the keyword
@@ -48,7 +48,7 @@ function M.config()
     -- list of highlight groups or use the hex color if hl not found as a fallback
     colors = {
       error = { "DiagnosticVirtualTextError", "ErrorMsg", "#DC2626" },
-      warning = { "DiagnosticVirtualTextWarn", "WarningMsg", "#FBBF24" },
+      garning = { "DiagnosticVirtualTextWarn", "WarningMsg", "#FBBF24" },
       info = { "DiagnosticVirtualTextInfo", "#2563EB" },
       hint = { "DiagnosticVirtualTextHint", "#10B981" },
       default = { "Identifier", "#7C3AED" },

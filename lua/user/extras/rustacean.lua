@@ -2,7 +2,7 @@
 local M = {
   "mrcjkb/rustaceanvim",
   version = "^4",
-  lazy = false,
+  lazy = true,
   ft = { "rust" },
 }
 
