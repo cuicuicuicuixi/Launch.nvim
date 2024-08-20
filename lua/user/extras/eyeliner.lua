@@ -1,5 +1,6 @@
 local M = {
   "jinh0/eyeliner.nvim",
+  event = { "BufReadPost", "BufNewFile" },
 }
 
 function M.config()

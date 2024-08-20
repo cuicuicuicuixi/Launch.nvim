@@ -1,5 +1,6 @@
 local M = {
   "j-hui/fidget.nvim",
+  event = { "BufReadPost", "BufNewFile" },
 }
 
 function M.config()

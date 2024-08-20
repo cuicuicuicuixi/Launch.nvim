@@ -1,5 +1,6 @@
 local M = {
   "saecki/crates.nvim",
+  ft = "toml",
   -- tag = 'stable',
 }
 

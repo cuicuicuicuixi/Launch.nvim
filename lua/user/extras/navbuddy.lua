@@ -1,5 +1,6 @@
 local M = {
   "SmiteshP/nvim-navbuddy",
+  event = { "BufReadPost", "BufNewFile" },
   dependencies = {
     "SmiteshP/nvim-navic",
     "MunifTanjim/nui.nvim",
