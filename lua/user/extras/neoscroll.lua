@@ -1,6 +1,7 @@
 local M = {
   "karb94/neoscroll.nvim",
   commit = "e786577",
+  event = { "BufReadPost", "BufNewFile" },
 }
 
 function M.config()

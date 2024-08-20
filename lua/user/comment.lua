@@ -1,6 +1,7 @@
 local M = {
   "numToStr/Comment.nvim",
-  lazy = false,
+  lazy = true,
+  event = {"BufReadPost", "BufNewFile"},
   dependencies = {
 
     {

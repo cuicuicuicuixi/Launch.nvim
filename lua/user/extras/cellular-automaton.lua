@@ -1,5 +1,6 @@
 local M = {
   "eandrju/cellular-automaton.nvim",
+  event = { "BufReadPost", "BufNewFile" },
 }
 
 function M.config()

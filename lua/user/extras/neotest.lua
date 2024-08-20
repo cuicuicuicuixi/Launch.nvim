@@ -14,6 +14,7 @@ local M = {
     "lawrence-laz/neotest-zig",
     "rcasia/neotest-bash",
   },
+  event = { "BufReadPost", "BufNewFile" },
 }
 
 function M.config()
