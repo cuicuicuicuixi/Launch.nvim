@@ -1,10 +1,10 @@
 local theme = {
-  fill = "TabLineFill",
-  head = "TabLine",
-  current_tab = "TabLineSel",
-  tab = "TabLine",
-  win = "TabLine",
-  tail = "TabLine",
+  fill = { fg = "#f2e9de", bg = "NONE" },
+  head = { fg = "#f2e9de", bg = "#000000" },
+  current_tab = { fg = "#ff007b", bg = "#2a2a2a", style = "italic" },
+  tab = { fg = "#3d4f5c", bg = "#000000" },
+  win = { fg = "#3d4f5c", bg = "#000000" },
+  tail = { fg = "#3d4f5c", bg = "#000000" },
 }
 
 local open_tabs = {}
@@ -80,37 +80,48 @@ end
 return {
   "nanozuki/tabby.nvim",
   event = "VeryLazy",
-  -- config = function()
-  --   require("tabby.tabline").set(function(line)
-  --     return {
-  --       {
-  --         { " 󰓩  ", hl = theme.head },
-  --         { tab_count(), hl = theme.head },
-  --         -- line.sep(" ", theme.head, theme.fill),
-  --         line.sep(" ", theme.head, theme.fill),
-  --       },
-  --       line.tabs().foreach(function(tab)
-  --         local hl = tab.is_current() and theme.current_tab or theme.tab
-  --         return {
-  --           -- line.sep("", hl, theme.fill),
-  --           line.sep("", hl, theme.fill),
-  --           tab.is_current() and "" or "",
-  --           tab_name(tab),
-  --           -- tab.close_btn("󰅖 "),
-  --           -- window_count(tab),
-  --           -- change_mark(tab),
-  --           -- line.sep(" ", hl, theme.fill),
-  --           line.sep(" ", hl, theme.fill),
-  --           hl = hl,
-  --           margin = " ",
-  --         }
-  --       end),
-  --       hl = theme.fill,
-  --     }
-  --   end, {
-  --     buf_name = {
-  --       mode = "unique",
-  --     },
-  --   })
-  -- end,
+  config = function()
+    require("tabby.tabline").set(function(line)
+      return {
+        {
+          { "  ", hl = theme.head },
+          line.sep("", theme.head, theme.fill),
+        },
+        line.tabs().foreach(function(tab)
+          local hl = tab.is_current() and theme.current_tab or theme.tab
+          return {
+            line.sep("", hl, theme.fill),
+            tab.is_current() and "" or "",
+            tab.number(),
+            tab.name(),
+            -- tab.close_btn(''), -- show a close button
+            line.sep("", hl, theme.fill),
+            hl = hl,
+            margin = " ",
+          }
+        end),
+        line.spacer(),
+        -- shows list of windows in tab
+        -- line.wins_in_tab(line.api.get_current_tab()).foreach(function(win)
+        --   return {
+        --     line.sep('', theme.win, theme.fill),
+        --     win.is_current() and '' or '',
+        --     win.buf_name(),
+        --     line.sep('', theme.win, theme.fill),
+        --     hl = theme.win,
+        --     margin = ' ',
+        --   }
+        -- end),
+        {
+          line.sep("", theme.tail, theme.fill),
+          { "  ", hl = theme.tail },
+        },
+        hl = theme.fill,
+      }
+    end, {
+      buf_name = {
+        mode = "unique",
+      },
+    })
+  end,
 }
